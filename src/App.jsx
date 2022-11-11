@@ -27,7 +27,7 @@ function App() {
       setList([...list, newItem]);
       setItem("");
       setError("");
-    } else if (item && item.length <= 25 && edit && editId) {
+    } else if (item && edit && editId) {
       setList(
         list.map((el) => {
           if (el.id === editId) {

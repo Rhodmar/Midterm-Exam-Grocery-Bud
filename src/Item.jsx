@@ -36,7 +36,9 @@ const Item = ({
     setEditId(id);
   };
 
+
   return (
+    <div className="clearbtn">
     <div className="item">
       <input
         type="text"
@@ -45,7 +47,7 @@ const Item = ({
           border: "none",
           outline: "none",
           backgroundColor: "transparent",
-          color: "pink",
+          color: "rgb(117, 86, 117)",
           fontSize: "17px",
           padding: "15px",
         }}
@@ -86,6 +88,9 @@ const Item = ({
         src={del}
         alt="delete item"
       />
+      
+    </div>
+    
     </div>
   );
 };

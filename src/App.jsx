@@ -15,7 +15,7 @@ function App() {
   const [editId, setEditId] = useState();
   const [list, setList] = useState(arr);
   const [error, setError] = useState("");
-
+  
   const handleSubmit = (e) => {
     const newItem = {
       id: uuidv4(),
@@ -23,7 +23,7 @@ function App() {
       complete: false,
     };
     e.preventDefault();
-    if (item && item.length <= 25 && !edit) {
+    if (item && !edit) {
       setList([...list, newItem]);
       setItem("");
       setError("");
@@ -41,8 +41,14 @@ function App() {
       setEdit(false);
       setError("");
     } else if (!item) setError("Item cannot be blank.");
-    else if (item.length > 25) setError("Character limit is 25.");
   };
+
+  const clearList = () => {
+
+    setError("")
+    setList([]);
+  
+};
 
   React.useEffect(() => {
     localStorage.setItem("data", JSON.stringify(list));
@@ -51,11 +57,13 @@ function App() {
   const handleChange = (e) => {
     setItem(e.target.value);
   };
+  
 
   return (
     <div className="Background">
     <div className="App">
       <h1>Grocery List</h1>
+      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           className="input"
@@ -66,15 +74,17 @@ function App() {
         />
         {edit ? (
           <button className="btn" type="submit">
-            Edit Item
+            Edit
           </button>
         ) : (
           <button className="btn" type="submit">
-            Add Item
+            Add
           </button>
         )}
-        {error && <p>{error}</p>}
+        
+        
       </form>
+      
       <div>
         {list.map((c, id) => (
           <Item
@@ -88,9 +98,26 @@ function App() {
             setEdit={setEdit}
             setEditId={setEditId}
           />
-        ))}
+          
+        ))
+        }
+
+              
       </div>
+      
     </div>
+    <button className='clear-btn' onClick={() =>{
+                    if(list.length == 0){
+                      setError("List is empty.");
+                    }
+                    else{
+                const confirmBox = window.confirm("Do you want to clear your grocery list?");
+                if (confirmBox === true){
+                  clearList();
+                }
+              }
+              }}>
+                Clear Items</button>
     </div>
   );
 }

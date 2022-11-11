@@ -1,17 +1,20 @@
 
 #root {
-  max-width: 1280px;
+  max-width: 400px;
   margin: 0 auto;
   padding: 2rem;
   padding-top: 5px;
   text-align: center;
-  background-color: rgb(255, 136, 0);
-  width:500px;
+  background-color: rgb(243, 243, 243);
+  width:600px;
   border-radius: 5px;
+  margin-top: 100px;
+  
 }
 h1{
   font-family: sans-serif;
   font-size: x-large;
+  color: #612958;
 }
 input{
   border-left: 3px;
@@ -19,12 +22,12 @@ input{
   font-size: 16px;
   border-width: 0px;
   border-color: #e0e0e0;
-  background-color: #d3c4d4;
-  color: #8a8a8a;
+  background-color: #d3c4d4 ;
+  color: #612958;
   border-style: hidden;
   padding-top: 6.5px;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
 input:focus{
   outline: none !important;
@@ -35,12 +38,58 @@ input:focus{
     background-color: rgb(117, 86, 117);
     font-size: 16px;
     box-shadow: none;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
     height: 31px;
 
   }
   .btn:active {
+    border-style: outset;
+    
+  }
+  p{
+    color: rgb(80, 0, 0);
+    background-color: rgba(255, 0, 0, 0.151);    
+    font-family: arial;
+    -webkit-animation: seconds 1.0s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 1s;
+    animation: seconds 1.0s forwards;
+    animation-iteration-count: 1;
+    animation-delay: 1s;
+  }
+
+  @-webkit-keyframes seconds {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      left: -9999px; 
+    }
+  }
+  @keyframes seconds {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      left: -9999px; 
+    }
+  }
+
+  .clear-btn{ 
+    border: 0;
+    color:rgb(202, 152, 202);
+    background-color: transparent;
+    font-size: 16px;
+    box-shadow: none;
+    border-radius: 3px;
+    margin: 15px;
+    height: 31px;
+
+  }
+  .clear-btn:active {
     border-style: outset;
     
   }

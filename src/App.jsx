@@ -1,34 +1,98 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
+import Item from "./Item";
+import { v4 as uuidv4 } from "uuid";
+
+const arr = () => {
+  let data = localStorage.getItem("data");
+  if (data) return JSON.parse(localStorage.getItem("data"));
+  else return [];
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [item, setItem] = useState("");
+  const [edit, setEdit] = useState(false);
+  const [editId, setEditId] = useState();
+  const [list, setList] = useState(arr);
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    const newItem = {
+      id: uuidv4(),
+      item: item,
+      complete: false,
+    };
+    e.preventDefault();
+    if (item && item.length <= 25 && !edit) {
+      setList([...list, newItem]);
+      setItem("");
+      setError("");
+    } else if (item && item.length <= 25 && edit && editId) {
+      setList(
+        list.map((el) => {
+          if (el.id === editId) {
+            return { ...el, item: item };
+          }
+          return el;
+        })
+      );
+      setItem("");
+      setEditId(null);
+      setEdit(false);
+      setError("");
+    } else if (!item) setError("Item cannot be blank.");
+    else if (item.length > 25) setError("Character limit is 25.");
+  };
+
+  React.useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(list));
+  }, [list]);
+
+  const handleChange = (e) => {
+    setItem(e.target.value);
+  };
 
   return (
+    <div className="Background">
     <div className="App">
+      <h1>Grocery List</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          className="input"
+          type="text"
+          value={item}
+          placeholder="Enter the items"
+          onChange={handleChange}
+        />
+        {edit ? (
+          <button className="btn" type="submit">
+            Edit Item
+          </button>
+        ) : (
+          <button className="btn" type="submit">
+            Add Item
+          </button>
+        )}
+        {error && <p>{error}</p>}
+      </form>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {list.map((c, id) => (
+          <Item
+            key={id}
+            id={c.id}
+            item={c.item}
+            list={list}
+            setList={setList}
+            complete={c.complete}
+            setItem={setItem}
+            setEdit={setEdit}
+            setEditId={setEditId}
+          />
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

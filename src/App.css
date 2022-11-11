@@ -1,10 +1,46 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  padding-top: 5px;
   text-align: center;
-  background-color: gray;
+  background-color: rgb(255, 136, 0);
+  width:500px;
+  border-radius: 5px;
 }
 h1{
   font-family: sans-serif;
+  font-size: x-large;
 }
+input{
+  border-left: 3px;
+  padding: 6px;
+  font-size: 16px;
+  border-width: 0px;
+  border-color: #e0e0e0;
+  background-color: #d3c4d4;
+  color: #8a8a8a;
+  border-style: hidden;
+  padding-top: 6.5px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+input:focus{
+  outline: none !important;
+}
+.btn{ 
+    border: 0;
+    color:white;
+    background-color: rgb(117, 86, 117);
+    font-size: 16px;
+    box-shadow: none;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    height: 31px;
+
+  }
+  .btn:active {
+    border-style: outset;
+    
+  }
